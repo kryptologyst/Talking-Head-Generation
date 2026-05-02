@@ -1,0 +1,38 @@
+# @package _global_
+
+defaults:
+  - model: wav2lip
+  - data: talking_head
+  - training: default
+  - evaluation: sync_quality
+  - _self_
+
+# Project settings
+project_name: "talking_head_generation"
+version: "0.1.0"
+seed: 42
+
+# Device settings
+device: "auto"  # auto, cuda, mps, cpu
+mixed_precision: true
+compile_model: false
+
+# Paths
+data_dir: "data"
+output_dir: "outputs"
+checkpoint_dir: "checkpoints"
+log_dir: "logs"
+assets_dir: "assets"
+
+# Safety and privacy
+enable_safety_checks: true
+enable_face_blur: false
+enable_watermark: false
+max_audio_duration: 30.0  # seconds
+max_video_resolution: 512
+
+# Demo settings
+demo_port: 8501
+demo_host: "0.0.0.0"
+enable_gradio: true
+enable_streamlit: true

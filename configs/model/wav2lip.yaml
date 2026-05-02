@@ -1,0 +1,41 @@
+# @package model
+
+_target_: src.models.wav2lip.Wav2LipModel
+
+# Model architecture
+audio_encoder:
+  type: "wav2vec2"
+  pretrained: "facebook/wav2vec2-base-960h"
+  freeze_encoder: false
+  output_dim: 768
+
+video_encoder:
+  type: "resnet"
+  pretrained: true
+  freeze_encoder: false
+  output_dim: 512
+
+fusion:
+  type: "cross_attention"
+  hidden_dim: 512
+  num_heads: 8
+  num_layers: 4
+
+decoder:
+  type: "unet"
+  input_channels: 3
+  output_channels: 3
+  base_channels: 64
+  num_layers: 4
+
+# Training parameters
+learning_rate: 1e-4
+weight_decay: 1e-5
+batch_size: 8
+max_epochs: 100
+
+# Loss weights
+sync_loss_weight: 1.0
+reconstruction_loss_weight: 1.0
+perceptual_loss_weight: 0.1
+adversarial_loss_weight: 0.1

@@ -1,0 +1,37 @@
+# @package data
+
+_target_: src.data.talking_head_dataset.TalkingHeadDataset
+
+# Dataset paths
+audio_dir: "data/audio"
+video_dir: "data/video"
+annotations_file: "data/annotations.json"
+
+# Audio preprocessing
+sample_rate: 16000
+max_audio_length: 10.0  # seconds
+audio_augmentation:
+  noise_prob: 0.1
+  speed_prob: 0.1
+  pitch_prob: 0.1
+
+# Video preprocessing
+video_fps: 25
+video_size: [256, 256]
+max_video_length: 10.0  # seconds
+video_augmentation:
+  flip_prob: 0.1
+  rotation_prob: 0.1
+  brightness_prob: 0.1
+
+# Data loading
+batch_size: 8
+num_workers: 4
+pin_memory: true
+persistent_workers: true
+
+# Splits
+train_split: 0.8
+val_split: 0.1
+test_split: 0.1
+random_seed: 42
